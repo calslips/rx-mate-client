@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 interface RegistrationProps {
   renderLogin: () => void;
@@ -10,6 +11,19 @@ const Registration = ({renderLogin}: RegistrationProps) => {
   const [confirmCredentials, setConfirmCredentials] = React.useState<string>('');
   const [disableBtn, setDisableBtn] = React.useState<boolean>(false);
 
+  const submitRegistration = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const result = await axios.post('http://localhost:8000/registration', {
+        username: username,
+        password: password,
+      });
+      console.log(result);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   React.useEffect(() => {
     password === confirmCredentials ? setDisableBtn(false) : setDisableBtn(true);
   }, [password, confirmCredentials]);
@@ -19,7 +33,7 @@ const Registration = ({renderLogin}: RegistrationProps) => {
     <h1 className='font-bold text-center text-cyan-400 text-xl mb-5'>
       Registration
     </h1>
-    <form>
+    <form onSubmit={e => submitRegistration(e)}>
       <div className='mb-5'>
         <label>Username</label>
         <input
