@@ -14,7 +14,7 @@ const Registration = ({renderLogin}: RegistrationProps) => {
   const submitRegistration = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const result = await axios.post('http://localhost:8000/registration', {
+      const result = await axios.post('/registration', {
         username: username,
         password: password,
       });

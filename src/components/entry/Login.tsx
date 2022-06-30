@@ -12,7 +12,7 @@ const Login = ({renderRegistration}: LoginProps) => {
   const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const result = await axios.post('http://localhost:8000/login', {
+      const result = await axios.post('/login', {
         username: username,
         password: password,
       });
