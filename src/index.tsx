@@ -4,6 +4,8 @@ import './index.css';
 import Landing from './pages/Landing';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dashboard from './pages/Dashboard';
+import Authenticate from './components/entry/Authenticate';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,6 +15,14 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={ <Landing /> } />
+        <Route
+          path='/dashboard'
+          element={
+            <Authenticate>
+              <Dashboard />
+            </Authenticate>
+          }
+        />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
