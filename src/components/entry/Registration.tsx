@@ -14,11 +14,25 @@ const Registration = ({renderLogin}: RegistrationProps) => {
   const submitRegistration = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const result = await axios.post('/registration', {
+      const res = await axios.post('/registration', {
         username: username,
         password: password,
       });
-      console.log(result);
+      console.log(res)
+      if (res.status === 200) {
+        const loginRes = await axios.post('/login', {
+          username: username,
+          password: password,
+        });
+
+        if (loginRes.status === 200) {
+          // if successful, save token
+          const token = loginRes.data.token;
+          localStorage.setItem('token', token);
+          // once login successful, redirect user to dashboard
+          window.location.href = '/dashboard';
+        }
+      }
     } catch (err) {
       console.error(err);
     }
@@ -66,9 +80,9 @@ const Registration = ({renderLogin}: RegistrationProps) => {
       </div>
       <div className='flex items-center justify-between'>
         <p>
-          Already a user? <span onClick={renderLogin} className='cursor-pointer text-cyan-400 underline underline-offset-4'>Login!</span>
+          Already a user? <span onClick={renderLogin} className='cursor-pointer text-cyan-400 hover:underline underline-offset-4'>Login!</span>
         </p>
-        <button className={`font-bold px-8 py-3 rounded-md text-white ${disableBtn ? 'bg-slate-400' : 'bg-cyan-400'}`} disabled={disableBtn} >
+        <button className={`font-bold px-8 py-3 rounded-md hover:text-white ${disableBtn ? 'bg-slate-400' : 'bg-cyan-400'}`} disabled={disableBtn} >
           Register
         </button>
       </div>
