@@ -1,13 +1,11 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import MedicationForm from '../components/medication/MedicationForm';
-import MedicationList, { Medication } from '../components/medication/MedicationList';
+import MedicationList from '../components/medication/MedicationList';
 import Navbar from '../components/Navbar';
+import { UserDataProps } from '../App';
 
-const Dashboard = () => {
-  const [user, setUser] = useState<string>('');
-  const [medications, setMedications] = useState<Medication[]>([]);
-
+const Dashboard = ({ user, setUser, meds, setMeds }: UserDataProps) => {
   useEffect(() => {
     (async function getUserData() {
       try {
@@ -22,21 +20,21 @@ const Dashboard = () => {
           }
         })
         setUser(userRes.data.user.username);
-        setMedications(medRes.data.medications);
+        setMeds(medRes.data.medications);
       }
       catch (err) {
         console.error(err);
       }
     })();
-  }, []);
+  }, [setUser, setMeds]);
 
   return (
     <>
       <Navbar />
       <section className='max-w-md mx-auto p-8'>
         <h1 className='font-bold mb-8 text-cyan-400 text-center text-xl'>{user}'s Medications</h1>
-        <MedicationForm meds={medications} setMeds={setMedications} />
-        <MedicationList meds={medications} setMeds={setMedications} />
+        <MedicationForm meds={meds} setMeds={setMeds} />
+        <MedicationList meds={meds} setMeds={setMeds} />
       </section>
     </>
   )
