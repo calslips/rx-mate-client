@@ -1,9 +1,10 @@
-import React from 'react';
+import { useState } from 'react';
 import Login from '../components/entry/Login';
 import Registration from '../components/entry/Registration';
 
 const Landing = () => {
-  const [isNewUser, setIsNewUser] = React.useState<Boolean>(false);
+  const [isNewUser, setIsNewUser] = useState<boolean>(false);
+
   return (
     <div className='flex w-full h-screen'>
       <div className='w-1/3 bg-cyan-400'></div>
