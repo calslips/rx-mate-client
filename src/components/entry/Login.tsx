@@ -12,14 +12,14 @@ const Login = ({renderRegistration}: LoginProps) => {
   const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const result = await axios.post('/login', {
+      const res = await axios.post('/login', {
         username: username,
         password: password,
       });
 
-      if (result.status === 200) {
+      if (res.status === 200) {
         // if successful, save token
-        const token = result.data.token;
+        const token = res.data.token;
         localStorage.setItem('token', token);
         // once login successful, redirect user to dashboard
         window.location.href = '/dashboard';
@@ -60,9 +60,9 @@ const Login = ({renderRegistration}: LoginProps) => {
         </div>
         <div className='flex items-center justify-between'>
           <p>
-            Not a user? <span onClick={renderRegistration} className='cursor-pointer text-cyan-400 underline underline-offset-4'>Register!</span>
+            Not a user? <span onClick={renderRegistration} className='cursor-pointer text-cyan-400 hover:underline underline-offset-4'>Register!</span>
           </p>
-          <button className='bg-cyan-400 font-bold px-8 py-3 rounded-md text-white'>
+          <button className='bg-cyan-400 font-bold px-8 py-3 rounded-md hover:text-white'>
             Login
           </button>
         </div>
