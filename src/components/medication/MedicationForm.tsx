@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { MedListProps } from './MedicationList';
+import { MasterMedListProps } from './MasterMedList';
 
-const MedicationForm = ({ meds, setMeds }: MedListProps) => {
+const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
   const [medication, setMedication] = useState<string>('');
 
   const addMedication = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -19,7 +19,7 @@ const MedicationForm = ({ meds, setMeds }: MedListProps) => {
             },
           }
         );
-        // if medication added succcessfully, reload dashboard to display
+        // if medication added succcessfully, modify state causing rerender
         if (res.status === 200) {
           setMeds([...meds, res.data.medication]);
           setMedication('');
