@@ -49,33 +49,36 @@ const Registration = ({renderLogin}: RegistrationProps) => {
     </h1>
     <form onSubmit={e => submitRegistration(e)}>
       <div className='mb-5'>
-        <label>Username</label>
+        <label htmlFor='username'>Username</label>
         <input
           onChange={e => setUsername(e.target.value)}
           className='border border-slate-400 px-4 py-3 mt-2 rounded-md p-2 w-full'
           type="text"
           placeholder='username'
           autoComplete='on'
+          id='username'
         />
       </div>
       <div className='mb-5'>
-        <label>Password</label>
+        <label htmlFor='password'>Password</label>
         <input
           onChange={e => setPassword(e.target.value)}
           className='border border-slate-400 px-4 py-3 mt-2 rounded-md p-2 w-full'
           type="password"
           placeholder='password'
           autoComplete='on'
+          id='password'
         />
       </div>
       <div className='mb-5'>
-        <label>Confirm Password</label>
+        <label htmlFor='confirmPassword'>Confirm Password</label>
         <input
           onChange={e => setConfirmCredentials(e.target.value)}
           className='border border-slate-400 px-4 py-3 mt-2 rounded-md p-2 w-full'
           type="password"
           placeholder='password'
           autoComplete='on'
+          id='confirmPassword'
         />
       </div>
       <div className='flex items-center justify-between'>
