@@ -1,8 +1,11 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useRef } from 'react';
 import { Medication, MasterMedListProps } from './MasterMedList';
 
 const MedicationList = ({ meds, setMeds }: MasterMedListProps) => {
+  const takenStyles: string[] = ['bg-slate-300', 'border-transparent', 'hover:shadow-inner', 'text-white'];
+  const notTakenStyles: string[] = ['border-slate-400', 'hover:shadow-lg']
+  const medsRef = useRef<HTMLLIElement[] | null[]>([]);
   const toggleAdministered = async (med: Medication) => {
     try {
       const res = await axios.put(`/medication/${med._id}`, {}, {
@@ -19,24 +22,17 @@ const MedicationList = ({ meds, setMeds }: MasterMedListProps) => {
     }
   };
 
-  useEffect(() => {
-    Array.from(
-      document.querySelectorAll('.med'),
-      (node, i) => {
-        const cls = ['bg-slate-300', 'border-transparent', 'hover:shadow-none', 'shadow-inner', 'text-white'];
-        return meds[i].administered
-          ? node.classList.add(...cls)
-          : node.classList.remove(...cls)
-      }
-    );
-  }, [meds]);
+  medsRef.current.map((ref, i) => meds[i].administered
+    ? (ref?.classList.add(...takenStyles), ref?.classList.remove(...notTakenStyles))
+    : (ref?.classList.remove(...takenStyles), ref?.classList.add(...notTakenStyles))
+  )
 
   return (
     <ul>
-      {meds.map(med => (
+      {meds.map((med, i) => (
          <li
-          className='med border border-slate-400 cursor-pointer font-bold hover:shadow-lg text-center mb-2 p-4 rounded-md'
-          id={med._id}
+          className='border cursor-pointer font-bold text-center mb-2 p-4 rounded-md'
+          ref={e => medsRef.current[i] = e}
           key={med._id}
           onClick={() => {toggleAdministered(med)}}
         >
