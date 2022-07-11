@@ -2,14 +2,8 @@ import Navbar from "../components/Navbar";
 import { UserDataProps } from '../App';
 import MedicationForm from "../components/medication/MedicationForm";
 import MasterMedList from "../components/medication/MasterMedList";
-import { getUserData } from './Dashboard';
-import { useEffect } from "react";
 
-const Profile = ({ user, setUser, meds, setMeds }: UserDataProps) => {
-  useEffect(() => {
-    getUserData(setUser, setMeds);
-  }, [setUser, setMeds]);
-
+const Profile = ({ user, meds, setMeds }: UserDataProps) => {
   return (
     <>
       <Navbar />
