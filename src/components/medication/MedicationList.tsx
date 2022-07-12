@@ -14,8 +14,8 @@ const MedicationList = ({ meds, setMeds }: MasterMedListProps) => {
         }
       });
       if (res.status === 200) {
-        const { medication } = res.data;
-        setMeds(meds.map(med => med._id === medication._id ? medication : med));
+        const { medications } = res.data;
+        setMeds(medications);
       }
     } catch (err) {
       console.error(err);
