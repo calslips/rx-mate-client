@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useRef } from 'react';
-import { Medication, MasterMedListProps } from './MasterMedList';
+import { Medication, MasterMedListProps } from '../../types';
 
 const MedicationList = ({ meds, setMeds }: MasterMedListProps) => {
   const takenStyles: string[] = ['bg-slate-300', 'border-transparent', 'hover:shadow-inner', 'text-white'];

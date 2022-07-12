@@ -1,15 +1,5 @@
 import axios from 'axios';
-
-export interface Medication {
-  _id: string;
-  name: string;
-  administered: boolean;
-}
-
-export interface MasterMedListProps {
-  meds: Medication[];
-  setMeds: (meds: Medication[]) => void;
-}
+import { MasterMedListProps, Medication } from '../../types';
 
 const MasterMedList = ({ meds, setMeds }: MasterMedListProps) => {
   const removeFromList = async (medication: Medication) => {

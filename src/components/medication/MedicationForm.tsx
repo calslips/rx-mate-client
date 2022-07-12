@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { MasterMedListProps } from './MasterMedList';
+import { MasterMedListProps } from '../../types';
 
 const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
   const [medication, setMedication] = useState<string>('');

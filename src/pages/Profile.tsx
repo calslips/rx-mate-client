@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import { UserDataProps } from '../App';
+import { UserDataProps } from '../types';
 import MedicationForm from "../components/medication/MedicationForm";
 import MasterMedList from "../components/medication/MasterMedList";
 import { getUserData } from './Dashboard';

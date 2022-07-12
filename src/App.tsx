@@ -4,14 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Authenticate from './components/entry/Authenticate';
 import Profile from './pages/Profile';
-import { Medication } from './components/medication/MasterMedList';
-
-export interface UserDataProps {
-  user: string;
-  setUser: (user: string) => void;
-  meds: Medication[];
-  setMeds: (meds: Medication[]) => void;
-}
+import { Medication } from './types';
 
 const App = () => {
   const [user, setUser] = useState<string>('');
