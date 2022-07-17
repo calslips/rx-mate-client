@@ -19,22 +19,25 @@ const MasterMedList = ({ meds, setMeds }: MasterMedListProps) => {
   };
 
   return (
-    <ul>
-      {meds.map(med => (
-        <li
-          className='border border-slate-400 flex items-center justify-between mb-2 p-4 rounded-md'
-          key={med._id}
-        >
-          {med.name}
-          <input
-            className='bg-red-400 cursor-pointer hover:text-white px-4 py-2 rounded-md'
-            type='button'
-            value='Remove'
-            onClick={() => {removeFromList(med)}}
-          />
-        </li>
-      ))}
-    </ul>
+    <section className='max-w-lg'>
+      <h2 className='font-bold mb-10 text-center'>Medication List</h2>
+      <ul>
+        {meds.map(med => (
+          <li
+            className='border border-slate-400 flex items-center justify-between mb-2 p-4 rounded-md'
+            key={med._id}
+          >
+            {med.name}
+            <input
+              className='bg-red-400 cursor-pointer hover:text-white px-4 py-2 rounded-md'
+              type='button'
+              value='Remove'
+              onClick={() => {removeFromList(med)}}
+            />
+          </li>
+        ))}
+      </ul>
+    </section>
   )
 };
 
