@@ -11,6 +11,11 @@ export interface MasterMedListProps {
 export interface Medication {
   _id: string;
   name: string;
+  type: string;
+  dose: string;
+  amount: number;
+  days: string[];
+  times: string[];
   administered: boolean;
   user: string;
 }

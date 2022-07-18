@@ -17,7 +17,14 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
       if (medication.trim().length) {
         const res = await axios.post(
           '/medication',
-          { name: medication },
+          {
+            name: medication,
+            type,
+            dose,
+            amount,
+            days,
+            times,
+          },
           {
             headers: {
               token: localStorage.getItem('token') || '',
@@ -28,6 +35,11 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
         if (res.status === 200) {
           setMeds([...meds, res.data.medication]);
           setMedication('');
+          setType('');
+          setDose('');
+          setAmount(1);
+          setDays([]);
+          setTimes([]);
         } // handle other status codes?
       }
     } catch (err) {
@@ -75,7 +87,7 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
         <div className='flex items-center justify-between mb-4'>
           <label htmlFor='medAmount' className='w-2/5'>Amount:</label>
           <input
-            className='border border-cyan-400 mr-5 p-2 rounded-md w-1/5'
+            className='border border-cyan-400 mr-2 sm:mr-5 p-2 rounded-md w-1/5'
             id='medAmount'
             max='100'
             min='1'
@@ -88,9 +100,9 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
               setAmount(+e.target.value);
             }}
           />
-          <label htmlFor='medDays' className='mr-4'>Day(s):</label>
+          <label htmlFor='medDays' className='mr-1 sm:mr-5'>Day(s):</label>
           <select
-            className='border border-cyan-400 rounded-md'
+            className='border border-cyan-400 pr-4 rounded-md min-w-fit'
             name='days'
             id='medDays'
             multiple
