@@ -6,7 +6,8 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
   const [medication, setMedication] = useState<string>('');
   const [type, setType] = useState<string>('');
   const [dose, setDose] = useState<string>('');
-  const [amount, setAmount] = useState<number>(1);
+  const [count, setCount] = useState<number>(1);
+  const [timesPerDay, setTimesPerDay] = useState<number>(1);
   const [days, setDays] = useState<string[]>([]);
   const [times, setTimes] = useState<string[]>([]);
 
@@ -19,9 +20,10 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
           '/medication',
           {
             name: medication,
+            count,
             type,
             dose,
-            amount,
+            timesPerDay,
             days,
             times,
           },
@@ -35,9 +37,10 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
         if (res.status === 200) {
           setMeds([...meds, res.data.medication]);
           setMedication('');
+          setCount(1);
           setType('');
           setDose('');
-          setAmount(1);
+          setTimesPerDay(1);
           setDays([]);
           setTimes([]);
         } // handle other status codes?
@@ -63,6 +66,18 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
           />
         </div>
         <div className='flex items-center mb-4'>
+          <label htmlFor='medCount' className='w-2/5'>Count:</label>
+          <input
+            className='border border-cyan-400 px-4 py-2 rounded-md w-3/4'
+            id='medCount'
+            max='20'
+            min='1'
+            type="number"
+            value={count}
+            onChange={e => setCount(+e.target.value)}
+          />
+        </div>
+        <div className='flex items-center mb-4'>
           <label htmlFor='medType' className='w-2/5'>Type:</label>
           <input
             className='border border-cyan-400 px-4 py-2 rounded-md w-3/4'
@@ -85,19 +100,19 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
           />
         </div>
         <div className='flex items-center justify-between mb-4'>
-          <label htmlFor='medAmount' className='w-2/5'>Amount:</label>
+          <label htmlFor='timesPerDay' className='w-2/5'>Times per day:</label>
           <input
             className='border border-cyan-400 mr-2 sm:mr-5 p-2 rounded-md w-1/5'
-            id='medAmount'
-            max='100'
+            id='timesPerDay'
+            max='20'
             min='1'
             type="number"
-            value={amount}
+            value={timesPerDay}
             onChange={e => {
-              if (times.length > amount) {
-                setTimes(times.slice(0, amount));
+              if (times.length > timesPerDay) {
+                setTimes(times.slice(0, timesPerDay));
               }
-              setAmount(+e.target.value);
+              setTimesPerDay(+e.target.value);
             }}
           />
           <label htmlFor='medDays' className='mr-1 sm:mr-5'>Day(s):</label>
@@ -147,7 +162,7 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
             </option>
           </select>
         </div>
-        {Array.from({length: amount}, (_, i) =>
+        {Array.from({length: timesPerDay}, (_, i) =>
           <div className='flex items-center mb-4' key={i}>
             <label htmlFor='medTime' className='w-2/5'>Time {i + 1}:</label>
             <input
@@ -157,7 +172,7 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
               type="time"
               value={times[i] || ''}
               onChange={e =>
-                setTimes([...Array(amount)].map((_, j) => i === j ? e.target.value : times[j]))
+                setTimes([...Array(timesPerDay)].map((_, j) => i === j ? e.target.value : times[j]))
               }
             />
           </div>
