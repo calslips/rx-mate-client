@@ -16,7 +16,7 @@ export interface Medication {
   dose: string;
   timesPerDay: number;
   days: string[];
-  times: string[];
+  time: string;
   administered: boolean;
   user: string;
 }
