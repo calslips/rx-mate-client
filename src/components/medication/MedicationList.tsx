@@ -36,7 +36,7 @@ const MedicationList = ({ meds, setMeds }: MasterMedListProps) => {
           key={med._id}
           onClick={() => {toggleAdministered(med)}}
         >
-          {med.name}
+          {med.time} {med.count} {med.name} {med.type} {med.dose} {med.administered ? 'Taken' : 'Not taken'}
         </li>
       ))}
     </ul>
