@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Landing from './pages/Landing';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Authenticate from './components/entry/Authenticate';
 import Profile from './pages/Profile';
@@ -11,7 +11,7 @@ const App = () => {
   const [medications, setMedications] = useState<Medication[]>([]);
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path='/' element={ <Landing /> } />
         <Route
@@ -31,7 +31,7 @@ const App = () => {
           }
         />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   )
 }
 
