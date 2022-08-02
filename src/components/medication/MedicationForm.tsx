@@ -35,7 +35,7 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
         );
         // if medication added succcessfully, modify state causing rerender
         if (res.status === 200) {
-          setMeds([...meds, ...res.data.medications]);
+          setMeds([...meds, ...res.data.medications].sort((a, b) => +a.time.split(':').join('') - +b.time.split(':').join('')));
           setMedication('');
           setCount(1);
           setType('');
