@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Medication, MasterMedListProps } from '../../types';
 
 const MedicationList = ({ meds, setMeds }: MasterMedListProps) => {
-  const takenStyles: string[] = ['bg-slate-300', 'border-transparent', 'hover:shadow-inner', 'text-white'];
-  const notTakenStyles: string[] = ['border-slate-400', 'hover:shadow-lg']
+  // const takenStyles: string[] = ['bg-slate-300', 'border-transparent', 'hover:shadow-inner', 'text-white'];
+  // const notTakenStyles: string[] = ['border-slate-400', 'hover:shadow-lg']
   const medsRef = useRef<HTMLLIElement[] | null[]>([]);
   const toggleAdministered = async (med: Medication) => {
     try {
@@ -22,10 +22,19 @@ const MedicationList = ({ meds, setMeds }: MasterMedListProps) => {
     }
   };
 
-  medsRef.current.map((ref, i) => meds[i].administered
-    ? (ref?.classList.add(...takenStyles), ref?.classList.remove(...notTakenStyles))
-    : (ref?.classList.remove(...takenStyles), ref?.classList.add(...notTakenStyles))
-  )
+  // medsRef.current.map((ref, i) => meds[i].administered
+  //   ? (ref?.classList.add(...takenStyles), ref?.classList.remove(...notTakenStyles))
+  //   : (ref?.classList.remove(...takenStyles), ref?.classList.add(...notTakenStyles))
+  // )
+
+  useEffect(() => {
+    const takenStyles: string[] = ['bg-slate-300', 'border-transparent', 'hover:shadow-inner', 'text-white'];
+    const notTakenStyles: string[] = ['border-slate-400', 'hover:shadow-lg']
+    medsRef.current.map((ref, i) => meds[i].administered
+      ? (ref?.classList.add(...takenStyles), ref?.classList.remove(...notTakenStyles))
+      : (ref?.classList.remove(...takenStyles), ref?.classList.add(...notTakenStyles))
+    )
+  }, [meds])
 
   return (
     <ul>
