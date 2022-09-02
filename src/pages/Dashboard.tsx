@@ -4,6 +4,13 @@ import { Medication, UserDataProps } from '../types';
 import MedicationList from '../components/medication/MedicationList';
 import Navbar from '../components/Navbar';
 
+// place in helpers
+const getMedsDue = (medsList: Medication[]) => {
+  const dayKey = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  const today = new Date().getDay();
+  return medsList.filter(med => med.days.includes(dayKey[today]));
+};
+
 export const getUserData = async (saveUser: (user: string) => void, saveMeds: (meds: Medication[]) => void) => {
   try {
     const res = await axios.get('/user', {
@@ -29,7 +36,7 @@ const Dashboard = ({ user, setUser, meds, setMeds }: UserDataProps) => {
       <Navbar />
       <section className='max-w-md mx-auto p-8'>
         <h1 className='font-bold mb-8 text-cyan-400 text-center text-xl'>{user}'s Medications</h1>
-        <MedicationList meds={meds} setMeds={setMeds} />
+        <MedicationList meds={getMedsDue(meds)} setMeds={setMeds} />
       </section>
     </>
   )
