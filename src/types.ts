@@ -21,7 +21,15 @@ export interface Medication {
   user: string;
 }
 
+interface History {
+  _id: string;
+  dateDue: Date;
+  medsDue: Medication[];
+  user: string;
+}
+
 export interface User {
-  username: string,
-  medications: Medication[],
+  username: string;
+  medications: Medication[];
+  history: History[];
 }
