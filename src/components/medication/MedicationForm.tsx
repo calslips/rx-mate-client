@@ -57,7 +57,7 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
         <div className='flex items-center mb-4'>
           <label htmlFor='medName' className='w-2/5'>Name:</label>
           <input
-            className='border border-cyan-400 px-4 py-2 rounded-md w-3/4'
+            className='border border-sky-500 px-4 py-2 rounded-md w-3/4'
             id='medName'
             required
             type="text"
@@ -68,7 +68,7 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
         <div className='flex items-center mb-4'>
           <label htmlFor='medCount' className='w-2/5'>Count:</label>
           <input
-            className='border border-cyan-400 px-4 py-2 rounded-md w-3/4'
+            className='border border-sky-500 px-4 py-2 rounded-md w-3/4'
             id='medCount'
             max='20'
             min='1'
@@ -80,7 +80,7 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
         <div className='flex items-center mb-4'>
           <label htmlFor='medType' className='w-2/5'>Type:</label>
           <input
-            className='border border-cyan-400 px-4 py-2 rounded-md w-3/4'
+            className='border border-sky-500 px-4 py-2 rounded-md w-3/4'
             id='medType'
             placeholder='e.g. pill, tablet, injection, etc.'
             type="text"
@@ -91,7 +91,7 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
         <div className='flex items-center mb-4'>
           <label htmlFor='medDose' className='w-2/5'>Dose:</label>
           <input
-            className='border border-cyan-400 px-4 py-2 rounded-md w-3/4'
+            className='border border-sky-500 px-4 py-2 rounded-md w-3/4'
             id='medDose'
             placeholder='e.g. 100 mg, 50 ml, etc.'
             type="text"
@@ -102,7 +102,7 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
         <div className='flex items-center justify-between mb-4'>
           <label htmlFor='timesPerDay' className='w-2/5'>Times per day:</label>
           <input
-            className='border border-cyan-400 mr-2 sm:mr-5 p-2 rounded-md w-1/5'
+            className='border border-sky-500 mr-2 sm:mr-5 p-2 rounded-md w-1/5'
             id='timesPerDay'
             max='20'
             min='1'
@@ -117,7 +117,7 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
           />
           <label htmlFor='medDays' className='mr-1 sm:mr-5'>Day(s):</label>
           <select
-            className='border border-cyan-400 pr-4 rounded-md min-w-fit'
+            className='border border-sky-500 pr-4 rounded-md min-w-fit'
             name='days'
             id='medDays'
             multiple
@@ -133,31 +133,31 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
                 : setDays(days.concat(e.target.value))
             }}
           >
-            <option value='none' className='hover:bg-cyan-400 hover:cursor-pointer'>
+            <option value='none' className='hover:bg-sky-500 hover:cursor-pointer'>
               None
             </option>
-            <option value='sunday' className='hover:bg-cyan-400 hover:cursor-pointer'>
+            <option value='sunday' className='hover:bg-sky-500 hover:cursor-pointer'>
               Sunday
             </option>
-            <option value='monday' className='hover:bg-cyan-400 hover:cursor-pointer'>
+            <option value='monday' className='hover:bg-sky-500 hover:cursor-pointer'>
               Monday
             </option>
-            <option value='tuesday' className='hover:bg-cyan-400 hover:cursor-pointer'>
+            <option value='tuesday' className='hover:bg-sky-500 hover:cursor-pointer'>
               Tuesday
             </option>
-            <option value='wednesday' className='hover:bg-cyan-400 hover:cursor-pointer'>
+            <option value='wednesday' className='hover:bg-sky-500 hover:cursor-pointer'>
               Wednesday
             </option>
-            <option value='thursday' className='hover:bg-cyan-400 hover:cursor-pointer'>
+            <option value='thursday' className='hover:bg-sky-500 hover:cursor-pointer'>
               Thursday
             </option>
-            <option value='friday' className='hover:bg-cyan-400 hover:cursor-pointer'>
+            <option value='friday' className='hover:bg-sky-500 hover:cursor-pointer'>
               Friday
             </option>
-            <option value='saturday' className='hover:bg-cyan-400 hover:cursor-pointer'>
+            <option value='saturday' className='hover:bg-sky-500 hover:cursor-pointer'>
               Saturday
             </option>
-            <option value='everyday' className='hover:bg-cyan-400 hover:cursor-pointer'>
+            <option value='everyday' className='hover:bg-sky-500 hover:cursor-pointer'>
               Everyday
             </option>
           </select>
@@ -166,7 +166,7 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
           <div className='flex items-center mb-4' key={i}>
             <label htmlFor='medTime' className='w-2/5'>Time {i + 1}:</label>
             <input
-              className='border border-cyan-400 px-4 py-2 rounded-md w-3/4'
+              className='border border-sky-500 px-4 py-2 rounded-md w-3/4'
               id='medTime'
               required
               type="time"
@@ -179,7 +179,7 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
         )}
         <div className='flex justify-end'>
         <input
-          className='bg-cyan-400 cursor-pointer hover:text-white px-4 py-2 rounded-md'
+          className='bg-sky-500 cursor-pointer hover:text-white px-4 py-2 rounded-md'
           type='submit'
           value='Add'
         />

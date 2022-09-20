@@ -8,7 +8,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className='bg-cyan-400 p-8'>
+    <nav className='bg-sky-500 p-8'>
       <section className='MOBILE-MENU md:hidden'>
         <div className='flex justify-between'>
           <div>

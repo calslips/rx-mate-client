@@ -84,7 +84,7 @@ const Dashboard = ({ user, setUser, meds, setMeds, setHistory, events, setEvents
     <>
       <Navbar />
       <section className='max-w-2xl mx-auto p-8'>
-        <h1 className='font-bold mb-8 text-cyan-400 text-center text-xl'>{user}'s Medications for {displayDate}</h1>
+        <h1 className='font-bold mb-8 text-sky-500 text-center text-xl'>{user}'s Medications for {displayDate}</h1>
         <MedicationList meds={getMedsDue(meds)} setMeds={setMeds} />
       </section>
     </>

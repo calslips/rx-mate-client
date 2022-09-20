@@ -44,7 +44,7 @@ const Registration = ({renderLogin}: RegistrationProps) => {
 
   return (
     <section style={{height: '300px'}}>
-    <h1 className='font-bold text-center text-cyan-400 text-xl mb-5'>
+    <h1 className='font-bold text-center text-sky-500 text-xl mb-5'>
       Registration
     </h1>
     <form onSubmit={e => submitRegistration(e)}>
@@ -83,9 +83,9 @@ const Registration = ({renderLogin}: RegistrationProps) => {
       </div>
       <div className='flex items-center justify-between'>
         <p>
-          Already a user? <span onClick={renderLogin} className='cursor-pointer text-cyan-400 hover:underline underline-offset-4'>Login!</span>
+          Already a user? <span onClick={renderLogin} className='cursor-pointer text-sky-500 hover:underline underline-offset-4'>Login!</span>
         </p>
-        <button className={`font-bold px-8 py-3 rounded-md hover:text-white ${disableBtn ? 'bg-slate-400' : 'bg-cyan-400'}`} disabled={disableBtn} >
+        <button className={`font-bold px-8 py-3 rounded-md hover:text-white ${disableBtn ? 'bg-slate-400' : 'bg-sky-500'}`} disabled={disableBtn} >
           Register
         </button>
       </div>

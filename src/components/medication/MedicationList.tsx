@@ -21,7 +21,7 @@ const MedicationList = ({ meds, setMeds }: MasterMedListProps) => {
   };
 
   useEffect(() => {
-    const takenStyles: string[] = ['bg-slate-300', 'border-transparent', 'hover:shadow-inner', 'text-white'];
+    const takenStyles: string[] = ['bg-slate-400', 'border-transparent', 'hover:shadow-inner', 'text-white'];
     const notTakenStyles: string[] = ['border-slate-400', 'hover:shadow-lg'];
     medsRef.current.map((ref, i) => meds[i].administered
       ? (ref?.classList.add(...takenStyles), ref?.classList.remove(...notTakenStyles))

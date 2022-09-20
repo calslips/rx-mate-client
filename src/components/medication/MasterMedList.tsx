@@ -20,7 +20,7 @@ const MasterMedList = ({ meds, setMeds }: MasterMedListProps) => {
 
   return (
     <section className='max-w-lg'>
-      <h2 className='font-bold mb-10 text-center'>Medication List</h2>
+      <h2 className='font-bold mb-10 text-center text-sky-500'>Medication List</h2>
       <ul>
         {meds.map(med => (
           <li

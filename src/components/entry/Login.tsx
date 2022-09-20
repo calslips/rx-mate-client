@@ -34,7 +34,7 @@ const Login = ({renderRegistration}: LoginProps) => {
 
   return (
     <section style={{height: '300px'}}>
-      <h1 className='font-bold text-center text-cyan-400 text-xl mb-5'>
+      <h1 className='font-bold text-center text-sky-500 text-xl mb-5'>
         Login
       </h1>
       <form onSubmit={(e) => submitLogin(e)}>
@@ -62,9 +62,9 @@ const Login = ({renderRegistration}: LoginProps) => {
         </div>
         <div className='flex items-center justify-between'>
           <p>
-            Not a user? <span onClick={renderRegistration} className='cursor-pointer text-cyan-400 hover:underline underline-offset-4'>Register!</span>
+            Not a user? <span onClick={renderRegistration} className='cursor-pointer text-sky-500 hover:underline underline-offset-4'>Register!</span>
           </p>
-          <button className='bg-cyan-400 font-bold px-8 py-3 rounded-md hover:text-white'>
+          <button className='bg-sky-500 font-bold px-8 py-3 rounded-md hover:text-white'>
             Login
           </button>
         </div>
