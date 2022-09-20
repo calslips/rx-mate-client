@@ -25,6 +25,20 @@ const Navbar = () => {
                 </span>
           }
           {
+            location.pathname === '/history'
+              ? <span
+                  className='cursor-default pr-8 font-bold text-white'
+                >
+                  History
+                </span>
+              : <span
+                  className='cursor-pointer pr-8 hover:text-white'
+                  onClick={() => { navigate('/history') }}
+                >
+                  History
+                </span>
+          }
+          {
             location.pathname === '/profile'
               ? <span
                   className='cursor-default pr-8 font-bold text-white'

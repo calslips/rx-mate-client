@@ -13,7 +13,7 @@ const Profile = ({ user, setUser, meds, setMeds }: UserDataProps) => {
   return (
     <>
       <Navbar />
-      <section className='max-w-lg mx-auto p-8'>
+      <section className='max-w-lg mx-auto py-8'>
         <h1 className='font-bold mb-8 text-cyan-400 text-center text-xl'>{user}'s Profile</h1>
         <MedicationForm meds={meds} setMeds={setMeds} />
         <MasterMedList meds={meds} setMeds={setMeds} />
