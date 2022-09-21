@@ -13,7 +13,13 @@ const Landing = () => {
       : <div className='flex w-full h-screen'>
           <div className='w-1/3 bg-sky-500'></div>
           <div className='w-2/3 relative max-w-xs mx-auto'>
-            <div className='absolute inset-0 m-auto' style={{height: '300px'}}>
+            <div className='hover:rotate-45 text-center'>
+              <img className='mx-auto mt-10' src="logo.png" alt="half yellow, half red medication capsule emoji" />
+              <h2>
+                <span className='bg-sky-500 font-bold py-1 px-2 rounded text-white'>RxMate</span>
+              </h2>
+            </div>
+            <div className='inset-0 m-auto' style={{height: '300px'}}>
               {( isNewUser && <Registration renderLogin={() => setIsNewUser(false)} /> ) || <Login renderRegistration={() => setIsNewUser(true)} />}
             </div>
           </div>
