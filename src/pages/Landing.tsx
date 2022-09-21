@@ -14,7 +14,7 @@ const Landing = () => {
           <div className='w-1/3 bg-sky-500'></div>
           <div className='w-2/3 relative max-w-xs mx-auto'>
             <div className='hover:rotate-45 text-center'>
-              <img className='mx-auto mt-10' src="logo.png" alt="half yellow, half red medication capsule emoji" />
+              <img className='mx-auto mt-10 scale-50' src="logo.png" alt="half yellow, half red medication capsule emoji" />
               <h2>
                 <span className='bg-sky-500 font-bold py-1 px-2 rounded text-white'>RxMate</span>
               </h2>
