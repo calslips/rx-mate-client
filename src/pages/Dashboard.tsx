@@ -4,6 +4,7 @@ import { History, MedHistoryProps, Medication } from '../types';
 import MedicationList from '../components/medication/MedicationList';
 import Navbar from '../components/Navbar';
 import { EventInput } from '@fullcalendar/react';
+import { registerAndSubscribe } from '../helpers/sw';
 
 // place in helpers
 const getMedHistory = async (
@@ -78,6 +79,7 @@ const Dashboard = ({ user, setUser, meds, setMeds, setHistory, events, setEvents
   useEffect(() => {
     getUserData(setUser, setMeds);
     getMedHistory(setHistory, setEvents, events);
+    registerAndSubscribe();
   }, [setUser, setMeds, setHistory, setEvents, events]);
 
   return (

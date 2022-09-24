@@ -57,8 +57,18 @@ export interface History {
   user: string;
 }
 
+interface Subscription {
+  endpoint: String,
+  expirationTime: Number,
+  keys: {
+    p256dh: String,
+    auth: String,
+  },
+}
+
 export interface User {
   username: string;
   medications: Medication[];
   history: History[];
+  subscription: Subscription;
 }
