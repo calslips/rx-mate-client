@@ -22,7 +22,7 @@ const MasterMedList = ({ meds, setMeds }: MasterMedListProps) => {
     <section className='max-w-lg'>
       <h2 className='font-bold mb-10 text-center text-sky-500'>Medication List</h2>
       <ul>
-        {meds.map(med => (
+        {[...meds].sort((a, b) => a.name.localeCompare(b.name)).map(med => (
           <li
             className='border border-slate-400 flex items-center justify-between mb-2 p-4 rounded-md'
             key={med._id}
