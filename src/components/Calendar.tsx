@@ -19,7 +19,7 @@ const Calendar = (events: CalendarData) => {
         year: 'numeric',
         day: 'numeric',
       }}
-      initialView='dayGridDay'
+      initialView='dayGridMonth'
       editable={true}
       selectable={true}
       selectMirror={true}
