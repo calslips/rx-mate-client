@@ -19,7 +19,11 @@ async function subscribe(swRegistration) {
       applicationServerKey: 'BPyujJw1wdS2o4l3SNLqQMbPdOuHXpcjLRklefrLCafMYuGYZv2eT9CohJFZvVyzCbFMSNn1r5vsa9au12it8R0',
     });
   }
-  axios.post('/subscribe', subscription);
+  axios.post('/subscribe', subscription, {
+    headers: {
+      token: localStorage.getItem('token') || '',
+    }
+  });
 }
 
 async function registerAndSubscribe() {
