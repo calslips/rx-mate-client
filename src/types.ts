@@ -1,12 +1,12 @@
-import { EventInput } from '@fullcalendar/react';
+// import { EventInput } from '@fullcalendar/react';
 
 export interface HistoryData {
   user: string;
-  events: EventInput[];
+  // events: EventInput[];
 }
 
 export interface CalendarData {
-  events: EventInput[];
+  // events: EventInput[];
 }
 
 // export interface CalendarEvents extends MedHistoryProps {
@@ -23,8 +23,8 @@ export interface CalendarData {
 export interface MedHistoryProps extends UserDataProps {
   history: History[];
   setHistory: (medHistory: History[]) => void;
-  events: EventInput[];
-  setEvents: (evtInput: EventInput[]) => void;
+  // events: EventInput[];
+  // setEvents: (evtInput: EventInput[]) => void;
 }
 
 export interface UserDataProps extends MasterMedListProps {

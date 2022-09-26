@@ -21,10 +21,22 @@
   align-items: center;
 }
 
-.fc-daygrid-more-link,
+div.react-calendar {
+  width: 100vw;
+}
+.react-calendar__month-view__days {
+  align-items: stretch;
+  height: 350px;
+}
+
+/* .react-calendar__tile {
+  align-content: stretch;
+} */
+
+/* .fc-daygrid-more-link,
 .fc-more-link {
   color: #2C3E50;
-}
+} */
 
 @media screen and (max-device-width: 550px) {
   .fc-header-toolbar {

@@ -3,14 +3,14 @@ import { useEffect } from 'react';
 import { History, MedHistoryProps, Medication } from '../types';
 import MedicationList from '../components/medication/MedicationList';
 import Navbar from '../components/Navbar';
-import { EventInput } from '@fullcalendar/react';
+// import { EventInput } from '@fullcalendar/react';
 import { registerAndSubscribe } from '../helpers/sw';
 
 // place in helpers
 const getMedHistory = async (
   saveHistory: (medHistory: History[]) => void,
-  saveEvents: (evtInput: EventInput[]) => void,
-  events: EventInput[],
+  // saveEvents: (evtInput: EventInput[]) => void,
+  // events: EventInput[],
 ) => {
   try {
     const res = await axios.get('/user', {
@@ -20,29 +20,29 @@ const getMedHistory = async (
     });
 
     saveHistory(res.data.user.history);
-    const historicalEvents: EventInput[] = formatHistory(res.data.user.history, events);
-    saveEvents(historicalEvents);
+    // const historicalEvents: EventInput[] = formatHistory(res.data.user.history, events);
+    // saveEvents(historicalEvents);
   } catch (err) {
     console.error(err);
   }
 };
 
-const formatHistory = (history: History[], events: EventInput[]) => {
-  const historyCount = history.reduce((count: number, dayHx: History) => dayHx.medsDue.length + count, 0);
+// const formatHistory = (history: History[], events: EventInput[]) => {
+//   const historyCount = history.reduce((count: number, dayHx: History) => dayHx.medsDue.length + count, 0);
 
-  if (historyCount !== events.length) {
-    for (let i = events.length; i <= historyCount; i++) {
-      history[i]?.medsDue.forEach((med, j) => {
-        events.push({
-          id: history[i]._id + j,
-          title: med.name + (med.administered ? ': Taken' : ': Not taken'),
-          start: history[i].dateDue.toString().replace(/T.*$/, '') + `T${med.time}`,
-        });
-      })
-    }
-  }
-  return events;
-};
+//   if (historyCount !== events.length) {
+//     for (let i = events.length; i <= historyCount; i++) {
+//       history[i]?.medsDue.forEach((med, j) => {
+//         events.push({
+//           id: history[i]._id + j,
+//           title: med.name + (med.administered ? ': Taken' : ': Not taken'),
+//           start: history[i].dateDue.toString().replace(/T.*$/, '') + `T${med.time}`,
+//         });
+//       })
+//     }
+//   }
+//   return events;
+// };
 
 const getMedsDue = (medsList: Medication[]) => {
   const dayKey = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
@@ -65,7 +65,7 @@ export const getUserData = async (saveUser: (user: string) => void, saveMeds: (m
   }
 }
 
-const Dashboard = ({ user, setUser, meds, setMeds, setHistory, events, setEvents }: MedHistoryProps) => {
+const Dashboard = ({ user, setUser, meds, setMeds, setHistory,/* events, setEvents*/ }: MedHistoryProps) => {
   const displayDate = new Date().toLocaleDateString(
     'en-US',
     {
@@ -78,9 +78,9 @@ const Dashboard = ({ user, setUser, meds, setMeds, setHistory, events, setEvents
 
   useEffect(() => {
     getUserData(setUser, setMeds);
-    getMedHistory(setHistory, setEvents, events);
+    getMedHistory(setHistory, /*setEvents, events*/);
     registerAndSubscribe();
-  }, [setUser, setMeds, setHistory, setEvents, events]);
+  }, [setUser, setMeds, setHistory, /*setEvents, events*/]);
 
   return (
     <>

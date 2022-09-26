@@ -7,13 +7,13 @@ import MedicationHistory from './pages/MedicationHistory';
 import Profile from './pages/Profile';
 import { Medication } from './types';
 import { History } from './types';
-import { EventInput } from '@fullcalendar/react'
+// import { EventInput } from '@fullcalendar/react'
 
 const App = () => {
   const [user, setUser] = useState<string>('');
   const [medications, setMedications] = useState<Medication[]>([]);
   const [history, setHistory] = useState<History[]>([]);
-  const [events, setEvents] = useState<EventInput[]>([]);
+  // const [events, setEvents] = useState<EventInput[]>([]);
 
   return (
     <BrowserRouter>
@@ -30,8 +30,8 @@ const App = () => {
                 setMeds={setMedications}
                 history={history}
                 setHistory={setHistory}
-                events={events}
-                setEvents={setEvents}
+                // events={events}
+                // setEvents={setEvents}
               />
             </Authenticate>
           }
@@ -40,7 +40,7 @@ const App = () => {
           path='/history'
           element={
             <Authenticate>
-              <MedicationHistory user={user} events={events} />
+              <MedicationHistory user={user} /*events={events}*/ />
             </Authenticate>
           }
         />
