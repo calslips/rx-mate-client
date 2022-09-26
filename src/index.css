@@ -32,18 +32,3 @@
     flex-direction: column;
   }
 }
-
-@media screen and (max-device-width: 413px) {
-  .fc-daygrid-more-link,
-  .fc-more-link {
-    position: absolute;
-    bottom: 2.4rem;
-  }
-}
-@media screen and (min-device-width: 414px) and (max-device-width: 550px) {
-  .fc-daygrid-more-link,
-  .fc-more-link {
-    position: absolute;
-    bottom: .5rem;
-  }
-}

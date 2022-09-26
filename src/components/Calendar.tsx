@@ -26,6 +26,7 @@ const Calendar = (events: CalendarData) => {
       dayMaxEvents={true}
       weekends={true}
       initialEvents={events} // alternatively, use the `events` setting to fetch from a feed
+      contentHeight={500}
     />
   )
 }
