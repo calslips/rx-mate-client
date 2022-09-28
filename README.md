@@ -1,46 +1,26 @@
-# Getting Started with Create React App
+# RxMate
+A web application to help you remember when to take your medications! Users can create accounts, log in, add and remove medications, mark medications as taken for the day, and check their medication intake history.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Link to project:** **[RxMate](https://rxmate.herokuapp.com/)**
 
-## Available Scripts
+<p align="center">
+  <a target="_blank" href="https://rxmate.herokuapp.com/">
+    <img src="https://i.ibb.co/PYhr36Q/rx-Mate-Thumbnail.jpg" width="50%" alt="Rx Mate web application login page."/>
+  </a>
+</p>
 
-In the project directory, you can run:
+<!-- ![RxMate web application login page.](https://i.ibb.co/PYhr36Q/rx-Mate-Thumbnail.jpg) -->
 
-### `npm start`
+## How It's Made:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Tech used:** JavaScript, TypeScript, CSS, Tailwind, MongoDB, Express.js, React, Node.js, axios, FullCalendar.io
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Account creation and credentialing was implemented with the use of [JWT](https://jwt.io/) (JavaScript Web Tokens) in conjunction with [bcrypt](https://www.npmjs.com/package/bcrypt) for hashing and encryption. [Mongoose](https://mongoosejs.com/) on top of [MongoDB](https://www.mongodb.com/) was used to maintain persistent storage of data for users, their medications and history. [React](https://reactjs.org/) was utilized to create a simplified interface including a dashboard for users to mark or unmark medications taken for the day, as well as a profile to add or remove medications. [FullCalendar](https://fullcalendar.io/) was implemented on the history page to enable users to view their historical medication intake. The use of the [Service Worker Web API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) along with the [web-push](https://www.npmjs.com/package/web-push) dependency enabled the addition of the notification/reminder feature. [Heroku](https://www.heroku.com/)'s scheduler capability also contributed to the notifications feature by facilitating scheduled pings to the server to identify medications due soon and distributing notifications when applicable.
 
-### `npm test`
+## Optimizations
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Refactor the structure of the data stored in the database. Currently, the User model contains all data relevent to their meds and history, so requesting user data retrieves all data whether it is needed or not. This schema could be separated out and handled more like relational data so that only pertienent data is retreived when necessary, but the related data is still connected and usable if needed. The calendar currently is read-only and displays the respective date's medication list. This could be refactored to include more interaction with the user, such as directly modifying medication lists (additions/removal) through the calendar. User feedback notifications need to be implemented (unsuccessful login, account already exists, etc.). Utilizing Heroku's free-tier and scheduler come with the constraints of limited resources. The project currently has the scheduler ping the server every hour and send reminder notifications for medications due within that timeframe. Ideally, this ping would occur more frequently and trigger notifications for medications due within 30 minute, 10 minute, and "now" intervals. Folder/file restructuring can also be improved to adopt a more MVC approach, as well as placing several helper functions in a helper directory and export them where needed.
 
-### `npm run build`
+## Lessons Learned:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Many dead ends were met in attempting to apply a notification system while the web application is closed. One of the potential solutions found was implementing the [Notification Triggers API](https://web.dev/notification-triggers/) in conjunction with the [Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API) and the [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API). Unfortunately, Google decided to no longer pursue the Notification Triggers API capabilities project. Thankfully, this led me to identify that I could utilize the Service Worker API to create effective offline experiences and allow access to push notifications. Since Service Workers are event driven, I needed to find a way to trigger an event to initiate a notification push. Initially, I looked into [node-cron](https://www.npmjs.com/package/node-cron) to implement scheduled tasks via node, but while investigating how to implement node-cron I stumbled upon Heroku's built-in scheduler capability. This enabled me to utilize a service I had already implemented in the application without having to install an extra dependency. While not being a completely ideal solution (as outlined in the optimizations section), it does serve the intended purpose.
