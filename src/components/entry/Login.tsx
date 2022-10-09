@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import SystemFeedback from '../SystemFeedback';
 
 interface LoginProps {
   renderRegistration: () => void;
@@ -8,6 +9,7 @@ interface LoginProps {
 const Login = ({renderRegistration}: LoginProps) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,12 +25,10 @@ const Login = ({renderRegistration}: LoginProps) => {
         localStorage.setItem('token', token);
         // once login successful, redirect user to dashboard
         window.location.href = '/dashboard';
-      } else {
-        // do some validation (400 vs 401 error), logging / display error to user
-        // (Invalid user / password display for user feedback, etc)
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      setError(err.response.data.error);
     }
   };
 
@@ -37,6 +37,7 @@ const Login = ({renderRegistration}: LoginProps) => {
       <h1 className='font-bold text-center text-sky-500 text-xl mb-5'>
         Login
       </h1>
+      {error && <SystemFeedback message={error} success={false} />}
       <form onSubmit={(e) => submitLogin(e)}>
         <div className='mb-5'>
           <label htmlFor='username'>Username</label>
