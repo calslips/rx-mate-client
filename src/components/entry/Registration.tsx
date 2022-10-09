@@ -1,52 +1,67 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import SystemFeedback from '../SystemFeedback';
 
 interface RegistrationProps {
   renderLogin: () => void;
 }
 
 const Registration = ({renderLogin}: RegistrationProps) => {
-  const [username, setUsername] = React.useState<string>('');
-  const [password, setPassword] = React.useState<string>('');
-  const [confirmCredentials, setConfirmCredentials] = React.useState<string>('');
-  const [disableBtn, setDisableBtn] = React.useState<boolean>(false);
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmCredentials, setConfirmCredentials] = useState<string>('');
+  const [disableBtn, setDisableBtn] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
   const submitRegistration = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const res = await axios.post('/registration', {
-        username: username,
-        password: password,
-      });
-      console.log(res)
-      if (res.status === 200) {
-        const loginRes = await axios.post('/login', {
+    if (!username.match(/^[A-Za-z][A-Za-z0-9-_]{7,19}$/)) {
+      setError(
+        'Usernames must be between 8-20 characters long, start with letters, and may contain numbers, dashes, and underscores'
+      );
+    } else if (!password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$/)) {
+      setError(
+        'Passwords must be at least 8 characters long and include uppercase, lowercase, numbers, and special characters'
+      );
+    } else {
+      try {
+        const res = await axios.post('/registration', {
           username: username,
           password: password,
         });
+        console.log(res)
+        if (res.status === 200) {
+          const loginRes = await axios.post('/login', {
+            username: username,
+            password: password,
+          });
 
-        if (loginRes.status === 200) {
-          // if successful, save token
-          const token = loginRes.data.token;
-          localStorage.setItem('token', token);
-          // once login successful, redirect user to dashboard
-          window.location.href = '/dashboard';
+          if (loginRes.status === 200) {
+            // if successful, save token
+            const token = loginRes.data.token;
+            localStorage.setItem('token', token);
+            // once login successful, redirect user to dashboard
+            window.location.href = '/dashboard';
+          }
         }
+      } catch (err: any) {
+        console.error(err);
+        setError(err.response.data.error);
       }
-    } catch (err) {
-      console.error(err);
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     password === confirmCredentials ? setDisableBtn(false) : setDisableBtn(true);
-  }, [password, confirmCredentials]);
+    disableBtn ? setError('Passwords must match') : setError('');
+  }, [password, confirmCredentials, disableBtn]);
 
   return (
     <section style={{height: '300px'}}>
     <h1 className='font-bold text-center text-sky-500 text-xl mb-5'>
       Registration
     </h1>
+    {error && <SystemFeedback message={error} success={false} />}
     <form onSubmit={e => submitRegistration(e)}>
       <div className='mb-5'>
         <label htmlFor='username'>Username</label>

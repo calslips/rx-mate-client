@@ -1,5 +1,10 @@
 import { EventInput } from '@fullcalendar/react';
 
+export interface FeedbackProps {
+  message: string;
+  success: boolean;
+}
+
 export interface HistoryData {
   user: string;
   events: EventInput[];

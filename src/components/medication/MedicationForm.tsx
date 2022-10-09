@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { MasterMedListProps } from '../../types';
+import SystemFeedback from '../SystemFeedback';
 
 const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
   const [medication, setMedication] = useState<string>('');
@@ -10,6 +11,7 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
   const [timesPerDay, setTimesPerDay] = useState<number>(1);
   const [days, setDays] = useState<string[]>([]);
   const [times, setTimes] = useState<string[]>([]);
+  const [notice, setNotice] = useState<string>('');
 
   const addMedication = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,6 +45,8 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
           setTimesPerDay(1);
           setDays([]);
           setTimes([]);
+          setNotice(`${res.data.title}: ${res.data.medications[0].name}`);
+          setTimeout(() => {setNotice('')}, 5000);
         } // handle other status codes?
       }
     } catch (err) {
@@ -52,6 +56,7 @@ const MedicationForm = ({ meds, setMeds }: MasterMedListProps) => {
 
   return (
     <form onSubmit={e => addMedication(e)}>
+      {notice && <SystemFeedback message={notice} success={true} />}
       <fieldset className='border flex-col mb-10 p-4 rounded'>
         <legend className='font-bold'>Add Medication</legend>
         <div className='flex items-center mb-4'>
