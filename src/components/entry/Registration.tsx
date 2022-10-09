@@ -44,8 +44,9 @@ const Registration = ({renderLogin}: RegistrationProps) => {
             window.location.href = '/dashboard';
           }
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error(err);
+        setError(err.response.data.error);
       }
     }
   };
