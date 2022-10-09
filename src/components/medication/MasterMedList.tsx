@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { MasterMedListProps, Medication } from '../../types';
+import SystemFeedback from '../SystemFeedback';
 
 const MasterMedList = ({ meds, setMeds }: MasterMedListProps) => {
+  const [notice, setNotice] = useState<string>('');
   const sortedMeds = [...meds].sort((a, b) => a.name.localeCompare(b.name));
   const medsRef = useRef<HTMLLIElement[] | null[]>([]);
   const removeFromList = async (medication: Medication) => {
@@ -15,6 +17,8 @@ const MasterMedList = ({ meds, setMeds }: MasterMedListProps) => {
       if (res.status === 204) {
         const newList = meds.filter(med => med._id !== medication._id);
         setMeds(newList);
+        setNotice('Medication successfully deleted');
+        setTimeout(() => {setNotice('')}, 5000);
       }
     } catch (err) {
       console.error(err);
@@ -31,6 +35,7 @@ const MasterMedList = ({ meds, setMeds }: MasterMedListProps) => {
   return (
     <section className='max-w-lg'>
       <h2 className='font-bold mb-10 text-center text-sky-500'>Medication List</h2>
+      {notice && <SystemFeedback message={notice} success={true} />}
       <div className='flex items-center justify-between pb-2'>
         <label className='font-bold' htmlFor="filter">Filter By Medication Name:</label>
         <input
