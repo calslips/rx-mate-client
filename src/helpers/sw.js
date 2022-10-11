@@ -29,10 +29,45 @@ async function subscribe(swRegistration) {
 async function registerAndSubscribe() {
   try {
     const serviceWorkerRegistration = await registerServiceWorker();
+    await axios.post('/swRegistration', {}, {
+      headers: {
+        token: localStorage.getItem('token') || '',
+      },
+    });
     await subscribe(serviceWorkerRegistration);
   } catch (err) {
     console.error(err);
   }
 }
 
-export { registerAndSubscribe };
+async function unregisterServiceWorker() {
+  try {
+    const swRegistration = await navigator.serviceWorker.getRegistration();
+    swRegistration?.unregister();
+    await axios.delete('/swRegistration', {
+      headers: {
+        token: localStorage.getItem('token') || '',
+      }
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function removeSubscription() {
+  try {
+    await axios.delete('/subscribe', {
+      headers: {
+        token: localStorage.getItem('token') || '',
+      }
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export {
+  registerAndSubscribe,
+  unregisterServiceWorker,
+  removeSubscription,
+};

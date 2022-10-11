@@ -1,10 +1,9 @@
 import axios from 'axios';
 import { useEffect } from 'react';
-import { History, MedHistoryProps, Medication } from '../types';
+import { DashboardProps, History, Medication } from '../types';
 import MedicationList from '../components/medication/MedicationList';
 import Navbar from '../components/Navbar';
 import { EventInput } from '@fullcalendar/react';
-import { registerAndSubscribe } from '../helpers/sw';
 
 // place in helpers
 const getMedHistory = async (
@@ -50,7 +49,11 @@ const getMedsDue = (medsList: Medication[]) => {
   return medsList.filter(med => med.days.includes(dayKey[today]));
 };
 
-export const getUserData = async (saveUser: (user: string) => void, saveMeds: (meds: Medication[]) => void) => {
+export const getUserData = async (
+  saveUser: (user: string) => void,
+  saveMeds: (meds: Medication[]) => void,
+  saveSwRegistered: (reg: boolean) => void
+) => {
   try {
     const res = await axios.get('/user', {
       headers: {
@@ -59,13 +62,14 @@ export const getUserData = async (saveUser: (user: string) => void, saveMeds: (m
     });
     saveUser(res.data.user.username);
     saveMeds(res.data.user.medications);
+    saveSwRegistered(res.data.user.swRegistered);
   }
   catch (err) {
     console.error(err);
   }
 }
 
-const Dashboard = ({ user, setUser, meds, setMeds, setHistory, events, setEvents }: MedHistoryProps) => {
+const Dashboard = ({ user, setUser, meds, setMeds, setHistory, events, setEvents, swRegistered, setSwRegistered }: DashboardProps) => {
   const displayDate = new Date().toLocaleDateString(
     'en-US',
     {
@@ -77,10 +81,9 @@ const Dashboard = ({ user, setUser, meds, setMeds, setHistory, events, setEvents
   );
 
   useEffect(() => {
-    getUserData(setUser, setMeds);
+    getUserData(setUser, setMeds, setSwRegistered);
     getMedHistory(setHistory, setEvents, events);
-    registerAndSubscribe();
-  }, [setUser, setMeds, setHistory, setEvents, events]);
+  }, [setUser, setMeds, setHistory, setEvents, setSwRegistered, events]);
 
   return (
     <>

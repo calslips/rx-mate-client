@@ -25,6 +25,21 @@ export interface CalendarData {
 //   ) => void;
 // }
 
+export interface ServiceWorkerProps {
+  swRegistered: boolean;
+  setSwRegistered: (registration: boolean) => void;
+}
+
+export interface ProfileProps extends UserDataProps {
+  swRegistered: boolean;
+  setSwRegistered: (registration: boolean) => void;
+}
+
+export interface DashboardProps extends MedHistoryProps {
+  swRegistered: boolean;
+  setSwRegistered: (registration: boolean) => void;
+}
+
 export interface MedHistoryProps extends UserDataProps {
   history: History[];
   setHistory: (medHistory: History[]) => void;
@@ -76,4 +91,5 @@ export interface User {
   medications: Medication[];
   history: History[];
   subscription: Subscription;
+  swRegistered: boolean;
 }
