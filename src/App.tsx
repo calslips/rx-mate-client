@@ -14,6 +14,7 @@ const App = () => {
   const [medications, setMedications] = useState<Medication[]>([]);
   const [history, setHistory] = useState<History[]>([]);
   const [events, setEvents] = useState<EventInput[]>([]);
+  const [swRegistered, setSwRegistered] = useState<boolean>(false);
 
   return (
     <BrowserRouter>
@@ -32,6 +33,8 @@ const App = () => {
                 setHistory={setHistory}
                 events={events}
                 setEvents={setEvents}
+                swRegistered={swRegistered}
+                setSwRegistered={setSwRegistered}
               />
             </Authenticate>
           }
@@ -48,7 +51,14 @@ const App = () => {
           path='/profile'
           element={
             <Authenticate>
-              <Profile user={user} setUser={setUser} meds={medications} setMeds={setMedications} />
+              <Profile
+                user={user}
+                setUser={setUser}
+                meds={medications}
+                setMeds={setMedications}
+                swRegistered={swRegistered}
+                setSwRegistered={setSwRegistered}
+              />
             </Authenticate>
           }
         />
